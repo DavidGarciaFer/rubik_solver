@@ -4,18 +4,23 @@ import moves
 
 LOG_FILENAME = './log/rubik_solver.log'
 
-logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s[%(filename)s:%(lineno)d] %(message)s', datefmt='%d-%m-%Y:%H:%M:%S', filename=LOG_FILENAME)
+logging.basicConfig(
+    format='%(asctime)s,%(msecs)d %(levelname)-8s[%(filename)s:%(lineno)d] %(message)s', datefmt='%d-%m-%Y:%H:%M:%S', filename=LOG_FILENAME)
+
 
 class Cube:
     def __init__(self, file_restrictions, file_colors):
+
+        self.solution = ''
+
         with open(file_restrictions, "r") as f:
             restrictions = json.load(f)
 
         # Creating the structure of the cube
         if "corners" not in restrictions or "edges" not in restrictions:
-            logging.error('Invalid syntax on '+ file_restrictions)
+            logging.error('Invalid syntax on ' + file_restrictions)
             return
-        
+
         # A corner is a list of 3 postitions
         self.corners = restrictions['corners']
         # An edge is a list of 2 positions
@@ -36,9 +41,14 @@ class Cube:
         with open(file_colors, 'r') as f:
             for line in f:
                 self.colors += line.split(' ')
-            self.colors = [color for color in self.colors if color not in ['', '\n']]
+            self.colors = [
+                color for color in self.colors if color not in ['', '\n']]
 
-
-
-
-
+    def other_edge(self, pos, color):
+        edge = self.neighbors[pos]
+        other = -1
+        if edge[0] is pos:
+            other = edge[1]
+        else:
+            other = edge[0]
+        return (other, self.colors[other])

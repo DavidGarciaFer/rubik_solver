@@ -151,7 +151,7 @@ def move_back(cube):
     copy[26] = cube.colors[38]
     cube.colors = copy
 
-def move_step(cube, direction):
+def move_step(cube, direction, trace=True):
     if direction is 'r':
         move_right(cube)
     elif direction is 'l':
@@ -166,12 +166,13 @@ def move_step(cube, direction):
         move_down(cube)
     else:
         return
+    if trace:
+        cube.solution += direction + ' '
 
-def move(cube, movements):
+def move(cube, movements, trace=True):
     mov = movements.split(' ')
-    print mov
     for m in mov:
-        move_step(cube, m)
+        move_step(cube, m, trace)
 
 def scramble(cube, n):
     scramble = ''
@@ -179,5 +180,5 @@ def scramble(cube, n):
     for i in range(n):
         rand = randint(0, 5)
         scramble += mov[rand] + ' '
-    move(cube, scramble)
+    move(cube, scramble, False)
     return scramble
