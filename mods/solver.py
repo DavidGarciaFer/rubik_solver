@@ -1,8 +1,9 @@
 from cube import Cube
 import moves
 
+
 def white_cross(cube):
-    #clear_top(cube) 
+    # clear_top(cube)
     buf = []
     # Checking number of white edges in white face
     if cube.colors[41] == 'w':
@@ -46,7 +47,7 @@ def white_cross(cube):
             else:
                 moves.move_step(cube, 'd')
                 moves.move_step(cube, 'd')
-                moves.move_step(cube, 'd') 
+                moves.move_step(cube, 'd')
         if other[1] is 'g' and other[0] is not 35:
             if other[0] == 32:
                 moves.move_step(cube, 'd')
@@ -57,7 +58,7 @@ def white_cross(cube):
                 moves.move_step(cube, 'd')
                 moves.move_step(cube, 'd')
                 moves.move_step(cube, 'd')
-    
+
     elif len(buf) > 1:
         # Leaving the white face in the best position
         max = 0
@@ -70,9 +71,9 @@ def white_cross(cube):
             moves.move_step(cube, 'd', trace=False)
         for i in range(best):
             moves.move_step(cube, 'd')
-        
-    
-    clear_top(cube)              
+
+    clear_top(cube)
+
 
 def check_white_edges(cube):
     buf = []
@@ -105,12 +106,15 @@ def check_white_edges(cube):
                 count += 1
     return count
 
+
 def clear_top(cube):
     while cube.colors[1] == 'w' or cube.colors[4] == 'w' or cube.colors[6] == 'w' or cube.colors[3] == 'w':
         move_from_upper(cube)
 
+
 def move_from_center(cube):
     pass
+
 
 def move_from_upper(cube):
     buf = []
@@ -171,11 +175,8 @@ def move_from_upper(cube):
                 moves.move_step(cube, 'u')
             moves.move(cube, 'l l')
 
+
 def solve(cube):
     ''' if solved(cube):
         return '''
     white_cross(cube)
-
-
-
-

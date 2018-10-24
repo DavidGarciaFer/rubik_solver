@@ -3,7 +3,7 @@ import mods.draw as draw
 import mods.moves as moves
 import mods.solver as solver
 import os
-import pygame
+import pygame # pylint: disable=import-error
 import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -19,11 +19,11 @@ pygame.init()
 screen = pygame.display.set_mode((750, 600))
 screen.fill((255, 255, 255))
 
-#scramble = moves.scramble(cube, 10)
-#print scramble
+scramble = moves.scramble(cube, 10)
+print scramble
 #moves.move(cube, "f r u b b d r l u r l")
 #moves.move(cube, "l b l b d f l r l l")
-moves.move(cube, "d u f d r d f u b b")
+#moves.move(cube, "d u f d r d f u b b")
 
 draw.paint_cube(cube, screen)
 pygame.display.update()
