@@ -1,5 +1,6 @@
 import json
 import logging
+import moves
 
 LOG_FILENAME = 'rubik_solver.log'
 
@@ -37,7 +38,6 @@ class Cube:
                 self.colors += line.split(' ')
             self.colors = [color for color in self.colors if color not in ['', '\n']]
 
-                
 
 
 
