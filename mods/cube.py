@@ -2,7 +2,7 @@ import json
 import logging
 import moves
 
-LOG_FILENAME = 'rubik_solver.log'
+LOG_FILENAME = './log/rubik_solver.log'
 
 logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s[%(filename)s:%(lineno)d] %(message)s', datefmt='%d-%m-%Y:%H:%M:%S', filename=LOG_FILENAME)
 

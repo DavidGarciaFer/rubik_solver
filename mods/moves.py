@@ -1,4 +1,5 @@
 import cube
+from random import randint
 
 def move_right(cube):
     copy = list(cube.colors)
@@ -15,14 +16,14 @@ def move_right(cube):
     copy[23] = cube.colors[44]
     copy[13] = cube.colors[42]
 
-    copy[14] = cube.colors[16]
-    copy[15] = cube.colors[25]
-    copy[16] = cube.colors[36]
-    copy[25] = cube.colors[35]
-    copy[36] = cube.colors[34]
-    copy[35] = cube.colors[24]
-    copy[34] = cube.colors[14]
-    copy[24] = cube.colors[15]
+    copy[16] = cube.colors[14]
+    copy[25] = cube.colors[15]
+    copy[36] = cube.colors[16]
+    copy[35] = cube.colors[25]
+    copy[34] = cube.colors[36]
+    copy[24] = cube.colors[35]
+    copy[14] = cube.colors[34]
+    copy[15] = cube.colors[24]
     cube.colors = copy
 
 def move_left(cube):
@@ -149,3 +150,34 @@ def move_back(cube):
     copy[37] = cube.colors[39]
     copy[26] = cube.colors[38]
     cube.colors = copy
+
+def move_step(cube, direction):
+    if direction is 'r':
+        move_right(cube)
+    elif direction is 'l':
+        move_left(cube)
+    elif direction is 'u':
+        move_top(cube) 
+    elif direction is 'f':
+        move_front(cube)
+    elif direction is 'b':
+        move_back(cube)
+    elif direction is 'd':
+        move_down(cube)
+    else:
+        return
+
+def move(cube, movements):
+    mov = movements.split(' ')
+    print mov
+    for m in mov:
+        move_step(cube, m)
+
+def scramble(cube, n):
+    scramble = ''
+    mov = ['r', 'l', 'u', 'f', 'b', 'd']
+    for i in range(n):
+        rand = randint(0, 5)
+        scramble += mov[rand] + ' '
+    move(cube, scramble)
+    return scramble
