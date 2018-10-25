@@ -24,6 +24,7 @@ print scramble
 #moves.move(cube, "f r u b b d r l u r l")
 #moves.move(cube, "l b l b d f l r l l")
 #moves.move(cube, "d u f d r d f u b b")
+#moves.move(cube, "l u d r f l u r f l")
 
 draw.paint_cube(cube, screen)
 pygame.display.update()
