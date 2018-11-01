@@ -25,7 +25,11 @@ print scramble
 #moves.move(cube, "l b l b d f l r l l")
 #moves.move(cube, "d u f d r d f u b b")
 #moves.move(cube, "l u d r f l u r f l")
-
+#moves.move(cube, 'r l r r u d f l l b')
+#moves.move(cube, "f b f d r l b l r r")
+#moves.move(cube, 'u l l l l f l d l u')
+# Se resuelve solo al hacer la cara blanca
+# moves.move(cube, 'f r r r r b b u d u ')
 draw.paint_cube(cube, screen)
 pygame.display.update()
 inp = raw_input("Solve: ")
