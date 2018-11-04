@@ -299,7 +299,7 @@ def fix_bottom_corners_front(cube):
         moves.move(cube, 'b u b b b')
         top_corners(cube)
     if cube.colors[34] == 'w':
-        moves.move('r u r r r')
+        moves.move(cube, 'r u r r r')
         top_corners(cube)
 
 
@@ -358,13 +358,63 @@ def top_corners(cube):
             moves.move(cube, 'u')
         top_corner_left(cube)
 
-def mid_edges(cube):
-    pass
 
-def mid_edges_from_top(cube):
-    pass
+def insert_edge_front(cube):
+    if cube.colors[6] == 'r' and cube.colors[12] == 'g':
+        moves.move(cube, 'u u f f f u f u r u u u r r r')
+    elif cube.colors[6] == 'g' and cube.colors[12] == 'r':
+        moves.move(cube, 'u r u u u r r r u u u f f f u f')
+    elif cube.colors[6] == 'g' and cube.colors[12] == 'o':
+        moves.move(cube, 'u r r r u r u b u u u b b b')
+    elif cube.colors[6] == 'o' and cube.colors[12] == 'g':
+        moves.move(cube, 'b u u u b b b u u u r r r u r')
+    elif cube.colors[6] == 'o' and cube.colors[12] == 'b':
+        moves.move(cube, 'b b b u b u l u u u l l l')
+    elif cube.colors[6] == 'b' and cube.colors[12] == 'o':
+        moves.move(cube, 'u u u l u u u l l l u u u b b b u b')
+    elif cube.colors[6] == 'b' and cube.colors[12] == 'r':
+        moves.move(cube, 'u u u l l l u l u f u u u f f f')
+    elif cube.colors[6] == 'r' and cube.colors[12] == 'b':
+        moves.move(cube, 'u u f u u u f f f u u u l l l u l')
+
+def mid_edges_top(cube):
+    while check_top_yellow(cube) == False:
+    #for i in range(2):
+        if cube.colors[6] != 'y' and cube.colors[12] != 'y':
+            insert_edge_front(cube)
+        else:
+            moves.move(cube, 'u')
+
+def mid_edges_flip(cube):
+    if cube.colors[21] != 'b' or cube.colors[22] != 'r':
+        moves.move(cube, 'f u u u f f f u u u l l l u l')
+    elif cube.colors[27] != 'o' or cube.colors[20] != 'b':
+        moves.move(cube, 'b b b u b u l u u u l l l')
+    elif cube.colors[25] != 'g' or cube.colors[26] != 'o':
+        moves.move(cube, 'b u u u b b b u u u r r r u r ')
+    elif cube.colors[23] != 'r' or cube.colors[24] != 'g':
+        moves.move(cube, 'r u u u r r r u u u f f f u f')
+
+def mid_edges(cube):
+    mid_edges_top(cube)
+    while check_mid_row(cube) == False:
+        mid_edges_flip(cube)
+        mid_edges_top(cube)
+
+def check_mid_row(cube):
+    return cube.colors[20] == 'b' and cube.colors[21] == 'b' and \
+           cube.colors[22] == 'r' and cube.colors[23] == 'r' and \
+           cube.colors[24] == 'g' and cube.colors[25] == 'g' and \
+           cube.colors[26] == 'o' and cube.colors[27] == 'o'
+
+def check_top_yellow(cube):
+    return (cube.colors[6] == 'y' or cube.colors[12] == 'y') and \
+           (cube.colors[4] == 'y' or cube.colors[15] == 'y') and \
+           (cube.colors[1] == 'y' or cube.colors[18] == 'y') and \
+           (cube.colors[3] == 'y' or cube.colors[9] == 'y')
 
 def solve(cube):
     white_cross(cube)
     top_corner_left(cube)
     white_corners(cube)
+    mid_edges(cube)
